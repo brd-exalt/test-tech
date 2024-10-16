@@ -1,0 +1,17 @@
+frontend:
+  image: ""
+  service:
+    port: 80
+
+backend:
+  image: ""
+  service:
+    port: 8080
+  env:
+    postgresUsername: ""
+    postgresPassword: ""
+    postgresUrl: ""
+
+ingress:
+  enabled: true
+  hostname: localhost

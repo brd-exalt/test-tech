@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: front-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: front
+  template:
+    metadata:
+      labels:
+        app: front
+    spec:
+      containers:
+      - name: front
+        image: {{ .Values.frontend.image }}
+        ports:
+        - containerPort: {{ .Values.frontend.service.port }}
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+      - name: backend
+        image: {{ .Values.backend.image }}
+        env:
+        - name: SPRING_POSTGRES_USERNAME
+          value: "{{ .Values.backend.env.postgresUsername }}"
+        - name: SPRING_POSTGRES_PASSWORD
+          value: "{{ .Values.backend.env.postgresPassword }}"
+        - name: SPRING_POSTGRES_URL
+          value: "{{ .Values.backend.env.postgresUrl }}"
+        ports:
+        - containerPort: {{ .Values.backend.service.port }}

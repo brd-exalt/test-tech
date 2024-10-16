@@ -1,0 +1,12 @@
+spring:
+  datasource:
+    url: ${SPRING_POSTGRES_URL}
+    username: ${SPRING_POSTGRES_USERNAME}
+    password: ${SPRING_POSTGRES_PASSWORD}
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
